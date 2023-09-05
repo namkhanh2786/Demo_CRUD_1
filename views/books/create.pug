@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+    h1 Create Book
+
+    form(action="/books/create", method="post")
+        div 
+            | Title 
+            input(name='title', type="text", required)
+        br
+        div 
+            | Price 
+            input(name='price', type="number", min=1, required)
+        br
+        div 
+            input(type='submit', value='Create')

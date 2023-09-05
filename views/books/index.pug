@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+    h3 
+        a(href="/books/create", type='_blank') Create New 
+    h1 Books List
+    h5 Search Book
+    form(action=`/books/search`)
+        input(name='title', placeholder='Enter Book Title')
+        input(name='Search', type='submit')
+    table
+        thead 
+            tr 
+                th(style='padding: 3em')  ID 
+                th(style='padding: 3em')  Title 
+                th(style='padding: 3em')  Price
+                th(style='padding: 3em')  Actions 
+        tbody(style='float: center')
+            if books != null 
+                each item in books 
+                    tr 
+                        td(style='padding: 3em')= item._id 
+                        td(style='padding: 3em')= item.title 
+                        td(style='padding: 3em')= item.price 
+                        td(style='padding: 3em') 
+                            a(href=`/books/update/${item._id}`) Update
+                            a(href=`/books/delete/${item._id}`, style='margin-left: 0.3em;') Delete
+            else 
+                tr 
+                    td(colspan='5') No data 
