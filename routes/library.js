@@ -21,4 +21,16 @@ router.post('/create', async function(req, res, next){ //non-lambda
     return res.redirect('/books')
 })
 
+router.get('/update/:id', async function(req, res, next) {
+    const bookID = req.params.id;
+    let bookGetInfo = await bookModel.findById(bookID);
+    return res.render('books/update', {foundProducts : bookGetInfo});
+})
+
+router.post('/update/:id', async function(req, res, next) {
+    let body = req.body;
+    let bookUpdate = await bookModel.findByIdAndUpdate(req.params.id, body);
+    return res.redirect('/books');
+})
+
 module.exports = router;
