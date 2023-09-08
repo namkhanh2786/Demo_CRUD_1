@@ -33,4 +33,11 @@ router.post('/update/:id', async function(req, res, next) {
     return res.redirect('/books');
 })
 
+router.get('/delete/:id', async function(req, res, next) {
+    const bookID = req.params.id;
+    let body = req.body;
+    let deleteBook = await bookModel.findByIdAndRemove(bookID, body);
+    return res.redirect('/books');
+})
+
 module.exports = router;
