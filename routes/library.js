@@ -33,6 +33,12 @@ router.post('/update/:id', async function(req, res, next) {
     return res.redirect('/books');
 })
 
+router.get('/search', async (req, res, next) => {
+    const searchValue = req.query.title;
+    const searchLookUp = await bookModel.find({title : new RegExp(searchValue, 'i')}) //case insensitive
+    return res.render('books/index', {books : searchLookUp});
+})
+
 router.get('/delete/:id', async function(req, res, next) {
     const bookID = req.params.id;
     let body = req.body;
